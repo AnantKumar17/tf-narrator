@@ -1,0 +1,463 @@
+{
+  "format_version": "1.0",
+  "terraform_version": "1.10.3",
+  "variables": {},
+  "planned_values": {
+    "root_module": {
+      "child_modules": [
+        {
+          "address": "module.hc_diagnosis_wf",
+          "resources": [
+            {
+              "address": "module.hc_diagnosis_wf.azurerm_resource_group.hc_diagnosis_wf_rg",
+              "mode": "managed",
+              "type": "azurerm_resource_group",
+              "name": "hc_diagnosis_wf_rg",
+              "provider_name": "registry.terraform.io/hashicorp/azurerm",
+              "schema_version": 0,
+              "values": {
+                "location": "chinanorth3",
+                "name": "hc-diagnosis-wf-canarycn20can-rg",
+                "tags": {
+                  "Environment": "canarycn20can",
+                  "HC01": "HC-HRE HANA",
+                  "Infrastructure": "Managed by Terraform",
+                  "Owner": "HRE BLR",
+                  "Service": "hc-diagnosis-wf"
+                }
+              }
+            },
+            {
+              "address": "module.hc_diagnosis_wf.azurerm_role_assignment.hc_diagnosis_wf_cam_ro_assignment",
+              "mode": "managed",
+              "type": "azurerm_role_assignment",
+              "name": "hc_diagnosis_wf_cam_ro_assignment",
+              "provider_name": "registry.terraform.io/hashicorp/azurerm",
+              "schema_version": 0,
+              "values": {
+                "principal_id": "951dbb46-e264-4499-b7c1-0725ad02cce6",
+                "role_definition_name": "Storage Blob Data Reader",
+                "scope": null
+              }
+            },
+            {
+              "address": "module.hc_diagnosis_wf.azurerm_role_assignment.hc_diagnosis_wf_rw_assignment",
+              "mode": "managed",
+              "type": "azurerm_role_assignment",
+              "name": "hc_diagnosis_wf_rw_assignment",
+              "provider_name": "registry.terraform.io/hashicorp/azurerm",
+              "schema_version": 0,
+              "values": {
+                "principal_id": "6b94897e-0571-43d6-a727-bfea8b949d5d",
+                "role_definition_name": "Storage Blob Data Contributor",
+                "scope": "/subscriptions/e1110140-da95-4c5e-b528-4eede9579004"
+              }
+            },
+            {
+              "address": "module.hc_diagnosis_wf.azurerm_storage_account.hc_diagnosis_wf_storage",
+              "mode": "managed",
+              "type": "azurerm_storage_account",
+              "name": "hc_diagnosis_wf_storage",
+              "provider_name": "registry.terraform.io/hashicorp/azurerm",
+              "schema_version": 4,
+              "values": {
+                "access_tier": "Hot",
+                "account_kind": "StorageV2",
+                "account_replication_type": "LRS",
+                "account_tier": "Standard",
+                "allow_nested_items_to_be_public": false,
+                "cross_tenant_replication_enabled": false,
+                "default_to_oauth_authentication": false,
+                "dns_endpoint_type": "Standard",
+                "https_traffic_only_enabled": true,
+                "infrastructure_encryption_enabled": false,
+                "is_hns_enabled": false,
+                "local_user_enabled": true,
+                "location": "chinanorth3",
+                "min_tls_version": "TLS1_2",
+                "name": "hcdwfcanarycn20can",
+                "nfsv3_enabled": false,
+                "public_network_access_enabled": true,
+                "queue_encryption_key_type": "Service",
+                "resource_group_name": "hc-diagnosis-wf-canarycn20can-rg",
+                "sftp_enabled": false,
+                "shared_access_key_enabled": true,
+                "table_encryption_key_type": "Service",
+                "tags": {
+                  "Environment": "canarycn20can",
+                  "HC01": "HC-HRE HANA",
+                  "Infrastructure": "Managed by Terraform",
+                  "Owner": "HRE BLR",
+                  "Service": "hc-diagnosis-wf",
+                  "sec-by-def-objectversioning-exception": "enabled"
+                },
+                "blob_properties": [
+                  {
+                    "change_feed_enabled": false,
+                    "last_access_time_enabled": false,
+                    "versioning_enabled": false
+                  }
+                ]
+              }
+            },
+            {
+              "address": "module.hc_diagnosis_wf.azurerm_storage_container.hc_diagnosis_wf_container",
+              "mode": "managed",
+              "type": "azurerm_storage_container",
+              "name": "hc_diagnosis_wf_container",
+              "provider_name": "registry.terraform.io/hashicorp/azurerm",
+              "schema_version": 1,
+              "values": {
+                "container_access_type": "private",
+                "encryption_scope_override_enabled": true,
+                "name": "hc-diagnosis-wf"
+              }
+            },
+            {
+              "address": "module.hc_diagnosis_wf.azurerm_storage_management_policy.hc_diagnosis_wf_policy",
+              "mode": "managed",
+              "type": "azurerm_storage_management_policy",
+              "name": "hc_diagnosis_wf_policy",
+              "provider_name": "registry.terraform.io/hashicorp/azurerm",
+              "schema_version": 0,
+              "values": {
+                "rule": [
+                  {
+                    "enabled": true,
+                    "name": "expire-blobs-after-183-days",
+                    "actions": [
+                      {
+                        "base_blob": [
+                          {
+                            "delete_after_days_since_modification_greater_than": 183
+                          }
+                        ],
+                        "version": [
+                          {
+                            "delete_after_days_since_creation": 30
+                          }
+                        ]
+                      }
+                    ],
+                    "filters": [
+                      {
+                        "blob_types": ["blockBlob"],
+                        "prefix_match": ["hc-diagnosis-wf/"]
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "address": "module.hc_diagnosis_wf.null_resource.hc_diagnosis_wf_rw_credentials",
+              "mode": "managed",
+              "type": "null_resource",
+              "name": "hc_diagnosis_wf_rw_credentials",
+              "provider_name": "registry.terraform.io/hashicorp/null",
+              "schema_version": 0,
+              "values": {}
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "resource_changes": [
+    {
+      "address": "module.hc_diagnosis_wf.azurerm_resource_group.hc_diagnosis_wf_rg",
+      "module_address": "module.hc_diagnosis_wf",
+      "mode": "managed",
+      "type": "azurerm_resource_group",
+      "name": "hc_diagnosis_wf_rg",
+      "provider_name": "registry.terraform.io/hashicorp/azurerm",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {
+          "location": "chinanorth3",
+          "name": "hc-diagnosis-wf-canarycn20can-rg",
+          "tags": {
+            "Environment": "canarycn20can",
+            "HC01": "HC-HRE HANA",
+            "Infrastructure": "Managed by Terraform",
+            "Owner": "HRE BLR",
+            "Service": "hc-diagnosis-wf"
+          }
+        },
+        "after_unknown": {
+          "id": true
+        },
+        "before_sensitive": false,
+        "after_sensitive": {}
+      }
+    },
+    {
+      "address": "module.hc_diagnosis_wf.azurerm_role_assignment.hc_diagnosis_wf_cam_ro_assignment",
+      "module_address": "module.hc_diagnosis_wf",
+      "mode": "managed",
+      "type": "azurerm_role_assignment",
+      "name": "hc_diagnosis_wf_cam_ro_assignment",
+      "provider_name": "registry.terraform.io/hashicorp/azurerm",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {
+          "principal_id": "951dbb46-e264-4499-b7c1-0725ad02cce6",
+          "role_definition_name": "Storage Blob Data Reader",
+          "scope": null
+        },
+        "after_unknown": {
+          "id": true,
+          "name": true,
+          "principal_type": true,
+          "role_definition_id": true,
+          "scope": true,
+          "skip_service_principal_aad_check": true,
+          "condition_version": true
+        },
+        "before_sensitive": false,
+        "after_sensitive": {}
+      }
+    },
+    {
+      "address": "module.hc_diagnosis_wf.azurerm_role_assignment.hc_diagnosis_wf_rw_assignment",
+      "module_address": "module.hc_diagnosis_wf",
+      "mode": "managed",
+      "type": "azurerm_role_assignment",
+      "name": "hc_diagnosis_wf_rw_assignment",
+      "provider_name": "registry.terraform.io/hashicorp/azurerm",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {
+          "principal_id": "6b94897e-0571-43d6-a727-bfea8b949d5d",
+          "role_definition_name": "Storage Blob Data Contributor",
+          "scope": "/subscriptions/e1110140-da95-4c5e-b528-4eede9579004"
+        },
+        "after_unknown": {
+          "id": true,
+          "name": true,
+          "principal_type": true,
+          "role_definition_id": true,
+          "skip_service_principal_aad_check": true,
+          "condition_version": true
+        },
+        "before_sensitive": false,
+        "after_sensitive": {}
+      }
+    },
+    {
+      "address": "module.hc_diagnosis_wf.azurerm_storage_account.hc_diagnosis_wf_storage",
+      "module_address": "module.hc_diagnosis_wf",
+      "mode": "managed",
+      "type": "azurerm_storage_account",
+      "name": "hc_diagnosis_wf_storage",
+      "provider_name": "registry.terraform.io/hashicorp/azurerm",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {
+          "access_tier": "Hot",
+          "account_kind": "StorageV2",
+          "account_replication_type": "LRS",
+          "account_tier": "Standard",
+          "allow_nested_items_to_be_public": false,
+          "cross_tenant_replication_enabled": false,
+          "default_to_oauth_authentication": false,
+          "dns_endpoint_type": "Standard",
+          "https_traffic_only_enabled": true,
+          "infrastructure_encryption_enabled": false,
+          "is_hns_enabled": false,
+          "local_user_enabled": true,
+          "location": "chinanorth3",
+          "min_tls_version": "TLS1_2",
+          "name": "hcdwfcanarycn20can",
+          "nfsv3_enabled": false,
+          "public_network_access_enabled": true,
+          "queue_encryption_key_type": "Service",
+          "resource_group_name": "hc-diagnosis-wf-canarycn20can-rg",
+          "sftp_enabled": false,
+          "shared_access_key_enabled": true,
+          "table_encryption_key_type": "Service",
+          "tags": {
+            "Environment": "canarycn20can",
+            "HC01": "HC-HRE HANA",
+            "Infrastructure": "Managed by Terraform",
+            "Owner": "HRE BLR",
+            "Service": "hc-diagnosis-wf",
+            "sec-by-def-objectversioning-exception": "enabled"
+          },
+          "blob_properties": [
+            {
+              "change_feed_enabled": false,
+              "last_access_time_enabled": false,
+              "versioning_enabled": false
+            }
+          ]
+        },
+        "after_unknown": {
+          "id": true,
+          "large_file_share_enabled": true,
+          "primary_access_key": true,
+          "primary_blob_connection_string": true,
+          "primary_blob_endpoint": true,
+          "primary_blob_host": true,
+          "primary_connection_string": true,
+          "primary_location": true,
+          "secondary_access_key": true,
+          "secondary_blob_connection_string": true,
+          "secondary_connection_string": true,
+          "secondary_location": true,
+          "network_rules": true,
+          "queue_properties": true,
+          "routing": true,
+          "share_properties": true
+        },
+        "before_sensitive": false,
+        "after_sensitive": {
+          "primary_access_key": true,
+          "primary_blob_connection_string": true,
+          "primary_connection_string": true,
+          "secondary_access_key": true,
+          "secondary_blob_connection_string": true,
+          "secondary_connection_string": true
+        }
+      }
+    },
+    {
+      "address": "module.hc_diagnosis_wf.azurerm_storage_container.hc_diagnosis_wf_container",
+      "module_address": "module.hc_diagnosis_wf",
+      "mode": "managed",
+      "type": "azurerm_storage_container",
+      "name": "hc_diagnosis_wf_container",
+      "provider_name": "registry.terraform.io/hashicorp/azurerm",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {
+          "container_access_type": "private",
+          "encryption_scope_override_enabled": true,
+          "name": "hc-diagnosis-wf"
+        },
+        "after_unknown": {
+          "id": true,
+          "default_encryption_scope": true,
+          "has_immutability_policy": true,
+          "has_legal_hold": true,
+          "metadata": true,
+          "resource_manager_id": true,
+          "storage_account_id": true
+        },
+        "before_sensitive": false,
+        "after_sensitive": {}
+      }
+    },
+    {
+      "address": "module.hc_diagnosis_wf.azurerm_storage_management_policy.hc_diagnosis_wf_policy",
+      "module_address": "module.hc_diagnosis_wf",
+      "mode": "managed",
+      "type": "azurerm_storage_management_policy",
+      "name": "hc_diagnosis_wf_policy",
+      "provider_name": "registry.terraform.io/hashicorp/azurerm",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {
+          "rule": [
+            {
+              "enabled": true,
+              "name": "expire-blobs-after-183-days",
+              "actions": [
+                {
+                  "base_blob": [
+                    {
+                      "delete_after_days_since_creation_greater_than": -1,
+                      "delete_after_days_since_last_access_time_greater_than": -1,
+                      "delete_after_days_since_modification_greater_than": 183,
+                      "tier_to_archive_after_days_since_creation_greater_than": -1,
+                      "tier_to_archive_after_days_since_last_access_time_greater_than": -1,
+                      "tier_to_archive_after_days_since_modification_greater_than": -1,
+                      "tier_to_cold_after_days_since_creation_greater_than": -1,
+                      "tier_to_cold_after_days_since_last_access_time_greater_than": -1,
+                      "tier_to_cold_after_days_since_modification_greater_than": -1,
+                      "tier_to_cool_after_days_since_creation_greater_than": -1,
+                      "tier_to_cool_after_days_since_last_access_time_greater_than": -1,
+                      "tier_to_cool_after_days_since_modification_greater_than": -1
+                    }
+                  ],
+                  "version": [
+                    {
+                      "change_tier_to_archive_after_days_since_creation": -1,
+                      "change_tier_to_cool_after_days_since_creation": -1,
+                      "delete_after_days_since_creation": 30,
+                      "tier_to_archive_after_days_since_last_tier_change_greater_than": -1,
+                      "tier_to_cold_after_days_since_creation_greater_than": -1
+                    }
+                  ]
+                }
+              ],
+              "filters": [
+                {
+                  "blob_types": ["blockBlob"],
+                  "prefix_match": ["hc-diagnosis-wf/"]
+                }
+              ]
+            }
+          ]
+        },
+        "after_unknown": {
+          "id": true,
+          "storage_account_id": true
+        },
+        "before_sensitive": false,
+        "after_sensitive": {}
+      }
+    },
+    {
+      "address": "module.hc_diagnosis_wf.null_resource.hc_diagnosis_wf_rw_credentials",
+      "module_address": "module.hc_diagnosis_wf",
+      "mode": "managed",
+      "type": "null_resource",
+      "name": "hc_diagnosis_wf_rw_credentials",
+      "provider_name": "registry.terraform.io/hashicorp/null",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {},
+        "after_unknown": {
+          "id": true
+        },
+        "before_sensitive": false,
+        "after_sensitive": {}
+      }
+    }
+  ],
+  "output_changes": {
+    "hc-diagnosis-wf-rw-technical-user-null-resource-call": {
+      "actions": ["create"],
+      "before": null,
+      "after": "python3 /scripts/create_azure_key_vanilla.py hc-cn20can azure/hana/hc-diagnosis-wf-azure-credentials 10f43eaa-0c68-461f-ba9e-0c55c1fe37be azure/infraadmin 7c9f4311-2363-43ba-9d40-5619212d5673 --subscription_id e1110140-da95-4c5e-b528-4eede9579004 --dry",
+      "after_unknown": false,
+      "before_sensitive": false,
+      "after_sensitive": false
+    }
+  },
+  "prior_state": {
+    "format_version": "1.0",
+    "terraform_version": "1.10.3",
+    "values": {
+      "root_module": {}
+    }
+  },
+  "configuration": {
+    "root_module": {
+      "module_calls": {
+        "hc_diagnosis_wf": {
+          "source": "_modules/azure/hana/hc-diagnosis-wf",
+          "expressions": {}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "format_version": "1.0",
+  "terraform_version": "1.3.0",
+  "resource_changes": [
+    {
+      "address": "aws_security_group.public_ssh",
+      "type": "aws_security_group",
+      "name": "public_ssh",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {
+          "ingress": [
+            {
+              "from_port": 22,
+              "to_port": 22,
+              "cidr_blocks": ["0.0.0.0/0"]
+            }
+          ]
+        },
+        "after_sensitive": {}
+      }
+    },
+    {
+      "address": "aws_s3_bucket.public_bucket",
+      "type": "aws_s3_bucket",
+      "name": "public_bucket",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {
+          "bucket": "my-public-bucket",
+          "acl": "public-read"
+        },
+        "after_sensitive": {}
+      }
+    },
+    {
+      "address": "aws_iam_role_policy.admin",
+      "type": "aws_iam_role_policy",
+      "name": "admin",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {
+          "policy": "{\"Statement\":[{\"Effect\":\"Allow\",\"Action\":\"*\",\"Resource\":\"*\"}]}"
+        },
+        "after_sensitive": {
+          "password": true
+        }
+      }
+    }
+  ]
+}

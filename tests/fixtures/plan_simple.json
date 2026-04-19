@@ -1,0 +1,20 @@
+{
+  "format_version": "1.0",
+  "terraform_version": "1.3.0",
+  "resource_changes": [
+    {
+      "address": "aws_s3_bucket.my_app_assets",
+      "type": "aws_s3_bucket",
+      "name": "my_app_assets",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {
+          "bucket": "my-app-assets-prod",
+          "acl": "private"
+        },
+        "after_sensitive": {}
+      }
+    }
+  ]
+}
